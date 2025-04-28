@@ -63,7 +63,7 @@
     }
 
     input, select {
-      width: 100%;
+      width: 95%;
       padding: 10px;
       margin-top: 5px;
       border: 1px solid #ccc;
@@ -156,11 +156,35 @@
     }
     
 
-    @media (max-width: 480px) {
+    @media screen and (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
       .container {
+        width: 90%;  /* 設定容器寬度為90% */
+        max-width: 300px;  /* 去掉最大寬度限制 */
         padding: 20px;
       }
+      h1 {
+        font-size: 11vw;
+      }
+      label {
+        font-size: 6vw;
+      }
+      input, select {
+        width: 95%;
+        font-size: 4vw;
+      }
+      button {
+        font-size: 16px;
+      }
+      #toggleMode {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+      }
     }
+
   </style>
 </head>
 
