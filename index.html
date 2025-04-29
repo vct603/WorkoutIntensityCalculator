@@ -108,7 +108,7 @@
     }
 
     #toggleMode {
-      position: absolute;
+      position: fixed;
       bottom: 60px;
       right: center;
       transform: translate(-50px, 0);
@@ -128,7 +128,7 @@
     }
 
     #toggleMode.dark {
-        position: absolute;
+      position: fixed;
       bottom: 60px;
       right: center;
       transform: translate(-50px, 0);
@@ -154,7 +154,7 @@
     }
     
     #aboutMode {
-      position: absolute;
+      position: fixed;
       bottom: 60px;
       left: center;
       transform: translate(50px, 0); 
@@ -173,7 +173,7 @@
       transition: background-color 0.3s ease;
     }
     #aboutMode.dark {
-      position: absolute;
+      position: fixed;
       bottom: 60px;
       left: center;
       transform: translate(50px, 0); 
@@ -243,7 +243,7 @@
     }
     
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 480px ) {
       body {
         padding: 10px;
       }
@@ -266,22 +266,26 @@
         font-size: 16px;
       }
       #toggleMode {
+        bottom: 40px;
         width: 40px;
         height: 40px;
         font-size: 18px;
       }
 
       #toggleMode.dark {
+        bottom: 40px;
         width: 40px;
         height: 40px;
         font-size: 18px;
       }
       #aboutMode {
+        bottom: 40px;
         width: 40px;
         height: 40px;
         font-size: 18px;
       }
       #aboutMode.dark{
+        bottom: 40px;
         width: 40px;
         height: 40px;
         font-size: 18px;
