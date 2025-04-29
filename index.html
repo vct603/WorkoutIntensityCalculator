@@ -109,11 +109,13 @@
 
     #toggleMode {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 40px;
-      height: 40px;
-      background-color: #fff;
+      bottom: 150px;
+      right: center;
+      transform: translate(-50px, 0);
+      width: 60px;
+      height: 60px;
+      text-align:center;
+      background-color: #ffffffd8;
       color: #000000;
       border-radius: 50%;
       border: none;
@@ -127,11 +129,13 @@
 
     #toggleMode.dark {
         position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 40px;
-      height: 40px;
-      background-color: #333;
+      bottom: 150px;
+      right: center;
+      transform: translate(-50px, 0);
+      width: 60px;
+      height: 60px;
+      text-align:center;
+      background-color: #333333d8;
       color: #fff;
       border-radius: 50%;
       border: none;
@@ -148,6 +152,89 @@
     #toggleMode.dark:hover {
       background-color: #f7f7f7be;
     }
+    
+    #aboutMode {
+      position: absolute;
+      bottom: 150px;
+      left: center;
+      transform: translate(50px, 0); 
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      background-color: #ffffffd8;
+      color: #000000;
+      border-radius: 50%;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s ease;
+    }
+    #aboutMode.dark {
+      position: absolute;
+      bottom: 150px;
+      left: center;
+      transform: translate(50px, 0); 
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      background-color: #333333d8;
+      color: #ffffff;
+      border-radius: 50%;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s ease;
+    }
+
+    #aboutMode:hover {
+      background-color: #363636c4;
+    }
+    #aboutMode.dark:hover {
+      background-color: #f7f7f7be;
+    }
+
+    #aboutOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .aboutContent {
+      background: #ffffffec;
+      padding: 30px 40px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 25px;
+      max-width: 90%;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    #closeAboutButton {
+      margin-top: 20px;
+      background-color: #b6b9ec;
+    }
+
+    #closeAboutButton:hover {
+      background-color: #878acf;
+    }
+
 
     #result {
       margin-top: 25px;
@@ -190,8 +277,21 @@
 
 <body>
   <button id="toggleMode" onclick="toggleMode()">🌙</button>
+  <button id="aboutMode" onclick="openAbout()">❓</button>
 
   <h1>運動強度計算器</h1>
+
+  <div id="aboutOverlay" class="hidden">
+    <div class="aboutContent">
+      <h2>關於Karvonen公式</h2>
+      <p>Karvonen公式又稱心率儲備法，由Karvonen於1957年提出。<br/>
+        該公式的計算方法: ((最大心跳率-安靜心跳率) x 目標強度%) + 安靜心跳率。<br/>
+        藉由這種方式算出的心跳區間，能精確顯示不同心率下的運動強度，<br/>
+        適合用來監測訓練狀況與評估目標強度。
+      </p>
+      <button id="closeAboutButton">關閉</button>
+    </div>
+  </div>
 
   <div class="container">
     <label>年齡</label>
@@ -218,7 +318,7 @@
 
   <script>
     function kar(age, rest, intense) {
-      let max = 220 - age;
+      let max = 208 - (0.7*age);
       return ((max - rest) * intense) + rest;
     }
 
@@ -267,12 +367,33 @@
     function toggleMode() {
       document.body.classList.toggle('dark');
       document.getElementById('toggleMode').classList.toggle('dark');
+      document.getElementById('aboutMode').classList.toggle('dark');
       if (document.body.classList.contains('dark')) {
         document.getElementById('toggleMode').innerHTML = "☀️";
       } else {
         document.getElementById('toggleMode').innerHTML = "🌙";
       }
     }
+
+    document.getElementById('aboutOverlay').addEventListener('click', closeAbout);
+    document.querySelector('.aboutContent').addEventListener('click', function(event) {
+      event.stopPropagation();
+    });
+
+
+    function openAbout() {
+      document.getElementById('aboutOverlay').classList.remove('hidden');
+    }
+
+    function closeAbout() {
+      document.getElementById('aboutOverlay').classList.add('hidden');
+    }
+    document.getElementById('aboutMode').addEventListener('click', openAbout);
+    document.getElementById('closeAboutButton').addEventListener('click', closeAbout);
+    document.getElementById('aboutOverlay').addEventListener('click', closeAbout);
+    document.querySelector('.aboutContent').addEventListener('click', function(event) {
+      event.stopPropagation();
+    });
   </script>
 </body>
 </html>
